@@ -2,58 +2,46 @@ syntax = "proto3";
 
 package user;
 
-option go_package = "github.com/your-org/project-protos/proto/user";
+option go_package = "github.com/your-org/project-protos/proto/user;user";
+
+service UserService {
+  // Создание пользователя
+  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+
+  // Получение списка пользователей
+  rpc ListUsers (ListUsersRequest) returns (ListUsersResponse);
+
+  // TODO: Получение одного пользователя по ID
+  // rpc GetUser (GetUserRequest) returns (GetUserResponse);
+
+  // TODO: Обновление пользователя
+  // rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+
+  // TODO: Удаление пользователя
+  // rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+}
 
 message User {
-  uint64 id    = 1;
+  string id = 1;
   string email = 2;
-  string name  = 3;
+  string name = 3;
 }
 
 message CreateUserRequest {
   string email = 1;
-  string name  = 2;
+  string name = 2;
 }
 message CreateUserResponse {
   User user = 1;
 }
 
-message GetUserRequest {
-  uint64 id = 1;
-}
-message GetUserResponse {
-  User user = 1;
-}
-
-message UpdateUserRequest {
-  User user = 1;
-}
-message UpdateUserResponse {
-  User user = 1;
-}
-
-message DeleteUserRequest {
-  uint64 id = 1;
-}
-message DeleteUserResponse {
-  bool deleted = 1;
-}
-
 message ListUsersRequest {
-  uint32 page      = 1;
-  uint32 page_size = 2;
+  int32 page = 1;
+  int32 page_size = 2;
 }
 message ListUsersResponse {
   repeated User users = 1;
-  uint32 page         = 2;
-  uint32 page_size    = 3;
-  uint64 total        = 4;
-}
-
-service UserService {
-  rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
-  rpc GetUser    (GetUserRequest)    returns (GetUserResponse);
-  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
-  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
-  rpc ListUsers  (ListUsersRequest)  returns (ListUsersResponse);
+  int32 page = 2;
+  int32 page_size = 3;
+  string total = 4;
 }
