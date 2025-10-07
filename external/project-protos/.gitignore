@@ -1,0 +1,6 @@
+# Generated
+*.pb.go
+
+# IDE
+.idea/
+.vscode/
