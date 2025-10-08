@@ -1,45 +1,41 @@
-# project-protos
+# 🧩 Users Service
 
-Общий репозиторий protobuf-контрактов для микросервисов **Users** и **Tasks**.
+gRPC-микросервис для управления пользователями.
 
-## Структура
+## 📦 Структура проекта
+
 ```
-proto/
-  user/user.proto
-  task/task.proto
-scripts/
-  install_protoc_msys.sh
-Makefile
-go.mod
-.gitignore
+services/users-service/
+├── cmd/server/main.go         # Точка входа
+├── internal/
+│   ├── database/db.go         # Инициализация БД
+│   ├── user/                  # ORM, Repository, Service
+│   └── transport/grpc/        # gRPC handler + server
+├── proto/                     # Контракты (из project-protos)
+└── users.db                   # SQLite база
 ```
 
-## Требования
-- MSYS2/MINGW64 окружение
-- `protoc` (Protocol Buffers Compiler) в PATH
+## 🚀 Запуск
+
+```bash
+cd services/users-service
+go mod tidy
+make build
+./bin/users-server
+```
+
+Сервер стартует на `:50051`.
+
+## 🧪 Проверка через grpcurl
+
+```bash
+grpcurl -plaintext -d '{"email":"alice@example.com","name":"Alice"}' localhost:50051 user.UserService/CreateUser
+grpcurl -plaintext -d '{"id":"1"}' localhost:50051 user.UserService/GetUser
+```
+
+## 🧱 Используемые технологии
+
 - Go 1.22+
-- Плагины:
-  - `google.golang.org/protobuf/cmd/protoc-gen-go`
-  - `google.golang.org/grpc/cmd/protoc-gen-go-grpc`
-
-## Установка protoc (MSYS2)
-```bash
-pacman -S --noconfirm --needed mingw-w64-x86_64-protobuf
-protoc --version
-```
-
-## Генерация
-```bash
-make tools
-make generate
-```
-
-## Очистка
-```bash
-make clean
-```
-
-## Проверка
-```bash
-make verify
-```
+- gRPC
+- GORM (SQLite)
+- Protocol Buffers

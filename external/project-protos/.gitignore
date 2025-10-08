@@ -1,5 +1,20 @@
-# Generated
+# Binaries
+/bin/
+/build/
+/dist/
 
-# IDE
+# Databases
+*.db
+
+# Logs
+*.log
+
+# IDE and system files
 .idea/
 .vscode/
+.DS_Store
+
+# Go
+/vendor/
+/coverage/
+*.out
