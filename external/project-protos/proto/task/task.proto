@@ -2,48 +2,46 @@ syntax = "proto3";
 
 package task;
 
-option go_package = "github.com/your-org/project-protos/proto/task;task";
+option go_package = "github.com/your-org/project-protos/proto/task";
 
-service TaskService {
-  // Создание задачи
-  rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
-
-  // Получение списка задач
-  rpc ListTasks (ListTasksRequest) returns (ListTasksResponse);
-
-  // TODO: Получение задачи по ID
-  // rpc GetTask (GetTaskRequest) returns (GetTaskResponse);
-
-  // TODO: Обновление задачи
-  // rpc UpdateTask (UpdateTaskRequest) returns (UpdateTaskResponse);
-
-  // TODO: Удаление задачи
-  // rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
-}
-
+// Сущность задача
 message Task {
-  string id = 1;
-  string title = 2;
+  uint64 id          = 1;
+  string title       = 2;
   string description = 3;
-  string assignee_id = 4;
+  uint64 assignee_id = 4; // ссылка на user.id
 }
 
-message CreateTaskRequest {
-  string title = 1;
-  string description = 2;
-  string assignee_id = 3;
-}
-message CreateTaskResponse {
-  Task task = 1;
-}
+// Create
+message CreateTaskRequest { string title = 1; string description = 2; uint64 assignee_id = 3; }
+message CreateTaskResponse { Task task = 1; }
 
-message ListTasksRequest {
-  int32 page = 1;
-  int32 page_size = 2;
-}
+// Get
+message GetTaskRequest { uint64 id = 1; }
+message GetTaskResponse { Task task = 1; }
+
+// Update
+message UpdateTaskRequest { Task task = 1; }
+message UpdateTaskResponse { Task task = 1; }
+
+// Delete
+message DeleteTaskRequest { uint64 id = 1; }
+message DeleteTaskResponse { bool deleted = 1; }
+
+// List
+message ListTasksRequest { uint32 page = 1; uint32 page_size = 2; uint64 assignee_id = 3; }
 message ListTasksResponse {
   repeated Task tasks = 1;
-  int32 page = 2;
-  int32 page_size = 3;
-  string total = 4;
+  uint32 page = 2;
+  uint32 page_size = 3;
+  uint64 total = 4;
+}
+
+// gRPC
+service TaskService {
+  rpc CreateTask (CreateTaskRequest) returns (CreateTaskResponse);
+  rpc GetTask    (GetTaskRequest)    returns (GetTaskResponse);
+  rpc UpdateTask (UpdateTaskRequest) returns (UpdateTaskResponse);
+  rpc DeleteTask (DeleteTaskRequest) returns (DeleteTaskResponse);
+  rpc ListTasks  (ListTasksRequest)  returns (ListTasksResponse);
 }
