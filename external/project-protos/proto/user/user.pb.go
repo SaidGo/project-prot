@@ -605,11 +605,11 @@ const file_proto_user_user_proto_rawDesc = "" +
 	".user.UserR\x05users\x12\x12\n" +
 	"\x04page\x18\x02 \x01(\rR\x04page\x12\x1b\n" +
 	"\tpage_size\x18\x03 \x01(\rR\bpageSize\x12\x14\n" +
-	"\x05total\x18\x04 \x01(\x04R\x05total2\xc6\x02\n" +
+	"\x05total\x18\x04 \x01(\x04R\x05total2\xca\x02\n" +
 	"\vUserService\x12?\n" +
 	"\n" +
-	"CreateUser\x12\x17.user.CreateUserRequest\x1a\x18.user.CreateUserResponse\x126\n" +
-	"\aGetUser\x12\x14.user.GetUserRequest\x1a\x15.user.GetUserResponse\x12?\n" +
+	"CreateUser\x12\x17.user.CreateUserRequest\x1a\x18.user.CreateUserResponse\x12:\n" +
+	"\vGetUserById\x12\x14.user.GetUserRequest\x1a\x15.user.GetUserResponse\x12?\n" +
 	"\n" +
 	"UpdateUser\x12\x17.user.UpdateUserRequest\x1a\x18.user.UpdateUserResponse\x12?\n" +
 	"\n" +
@@ -649,12 +649,12 @@ var file_proto_user_user_proto_depIdxs = []int32{
 	0,  // 3: user.UpdateUserResponse.user:type_name -> user.User
 	0,  // 4: user.ListUsersResponse.users:type_name -> user.User
 	1,  // 5: user.UserService.CreateUser:input_type -> user.CreateUserRequest
-	3,  // 6: user.UserService.GetUser:input_type -> user.GetUserRequest
+	3,  // 6: user.UserService.GetUserById:input_type -> user.GetUserRequest
 	5,  // 7: user.UserService.UpdateUser:input_type -> user.UpdateUserRequest
 	7,  // 8: user.UserService.DeleteUser:input_type -> user.DeleteUserRequest
 	9,  // 9: user.UserService.ListUsers:input_type -> user.ListUsersRequest
 	2,  // 10: user.UserService.CreateUser:output_type -> user.CreateUserResponse
-	4,  // 11: user.UserService.GetUser:output_type -> user.GetUserResponse
+	4,  // 11: user.UserService.GetUserById:output_type -> user.GetUserResponse
 	6,  // 12: user.UserService.UpdateUser:output_type -> user.UpdateUserResponse
 	8,  // 13: user.UserService.DeleteUser:output_type -> user.DeleteUserResponse
 	10, // 14: user.UserService.ListUsers:output_type -> user.ListUsersResponse
